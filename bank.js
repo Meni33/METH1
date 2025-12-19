@@ -1,3 +1,6 @@
+const bankDAO = require('./bankDAO');
+const bankTransfer = require('./bankTransfert');
+
 class BankAccount {
     #accountName;
     #accountNumber;
@@ -9,8 +12,8 @@ class BankAccount {
         this.#balance = balance;
     }
 
-    getBalance() {
-        return this.#balance;
+    getBalance(accountId) {
+        return bankDAO.retrieveBalance(accountId);
     }
 
     getAccountNumber() {
@@ -37,7 +40,15 @@ class BankAccount {
 
 const bank = {
     accounts: [],
-    BankAccount
+    BankAccount,
+    async transferMoney(accountId, amount) {
+        const result = await bankTransfer.transfer(accountId, accountId, amount);
+        await bankDAO.debitAccount(accountId, amount);
+        return result;
+    }
 };
 
-module.exports = bank;
+module.exports = BankAccount;
+module.exports.bank = bank;
+
+// Petite remarque bankTransfert est asychrone donc on peut utiliser resolve/reject dans les tests
