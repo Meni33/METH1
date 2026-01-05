@@ -20,6 +20,15 @@ export const accountDAO = {
     }
   },
   retrieveAccount(id) {
-    return ACCOUNT_LIST.find(account => account.id === id);
+    const account = ACCOUNT_LIST.find(acc => acc.id === id);
+    if (account) {
+      return {
+        id: account.id,
+        name: `${account.lastName} ${account.firstName}`
+      };
+    }
+  },
+  retrieveFullAccount(id) {
+    return ACCOUNT_LIST.find(acc => acc.id === id);
   },
 };
