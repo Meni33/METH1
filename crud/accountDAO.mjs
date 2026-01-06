@@ -1,4 +1,5 @@
 import { ACCOUNT_LIST } from "./database.mjs";
+import { Account } from "./account.mjs";
 
 export const accountDAO = {
   insertAccount(account) {
@@ -16,8 +17,8 @@ export const accountDAO = {
     const index = ACCOUNT_LIST.findIndex(acc => acc.id === account.id);
     if (index !== -1) {
       ACCOUNT_LIST[index] = account;
-      console.log(ACCOUNT_LIST);
     }
+    console.log(ACCOUNT_LIST);
   },
   retrieveAccount(id) {
     const account = ACCOUNT_LIST.find(acc => acc.id === id);
@@ -27,8 +28,14 @@ export const accountDAO = {
         name: `${account.lastName} ${account.firstName}`
       };
     }
+    return null;
   },
-  retrieveFullAccount(id) {
-    return ACCOUNT_LIST.find(acc => acc.id === id);
-  },
+  // Recupération les compte et retourne une instance de Account
+  account_instance(id) {
+    const account = ACCOUNT_LIST.find(acc => acc.id === id);
+    if (account) {
+      return new Account(account.id,account.lastName,account.firstName, account.creationDate);
+    }
+    return null;
+  }
 };

@@ -1,13 +1,16 @@
 import { accountService } from "./accountService.mjs";
 
+console.log("CRUD Client Test");
 accountService.addAccount("Dupont", "Jean");
+accountService.addAccount("Martin", "Marie");
+
+console.log("Liste des comptes après ajout:");
 const accounts = accountService.getAccountList();
 console.log(accounts);
 
-const accountId = accounts[0].id;
-accountService.saveAccount(accountId, "Martin", "Pierre");
-const updatedAccounts = accountService.getAccountList();
-console.log(updatedAccounts);
+console.log("Mise à jour du premier compte:");
+accountService.saveAccount(accounts[0].id, "Durand", "Jean-Pierre");
 
-const account = accountService.getAccount(accountId);
-console.log(account);
+console.log("Compte mis à jour:");
+const updateAccount = accountService.getAccount(accounts[0].id);
+console.log(updateAccount);
