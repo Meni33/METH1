@@ -1,0 +1,36 @@
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-large);
+    margin: var(--spacing-large);
+
+    & img {
+        border: 8px solid black;
+    }
+
+    & img:hover {
+        animation: bounce 1s ease-in-out;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gallery img:hover {
+        animation: none;
+    }
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}

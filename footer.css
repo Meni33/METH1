@@ -1,0 +1,7 @@
+footer {
+    color: green;
+    border: 2px solid crimson;
+    font-size: 12px;
+    padding: var(--spacing-small);
+    margin: var(--spacing-large);
+}
