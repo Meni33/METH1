@@ -11,7 +11,8 @@
     "nginx:clean": "docker stop feature-nginx; docker rmi feature/nginx",
     "nginx:build": "docker build -f nginx/Dockerfile -t feature/nginx ./nginx",
     "nginx:run": "docker run -d --rm --name feature-nginx --network feature-net -p 80:8080 feature/nginx",
-    "nginx:all": "npm run nginx:clean; npm run nginx:build; npm run nginx:run"
+    "nginx:all": "npm run nginx:clean; npm run nginx:build; npm run nginx:run",
+    "redis:run": "docker run -d --rm --network feature-net --name feature-redis redis:7.4.0-bookworm redis-server"
   },
   "keywords": [],
   "author": "",
