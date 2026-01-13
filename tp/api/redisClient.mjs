@@ -1,7 +1,7 @@
 // redisClient.mjs
 import { createClient } from "redis";
 
-const client = await createClient({ url: "redis://feature-redis" })
+const client = await createClient({ url: process.env.REDIS_URL })
   .on("error", (error) => console.log(error))
   .connect();
 

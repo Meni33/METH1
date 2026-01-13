@@ -10,5 +10,5 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["node", "api/index.mjs"]
+CMD ["node", "--env-file", "api/.env", "api/index.mjs"]
 
