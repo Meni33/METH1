@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7.4.0-bookworm
+    container_name: feature-redis
+    command: redis-server --appendonly yes --dir /data
+    volumes:
+      - feature-redis-data:/data
+    networks:
+      - feature-net
+
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    image: feature/api
+    container_name: feature-api
+    ports:
+      - "3000:80"
+    volumes:
+      - ./api/.env:/usr/app/src/.env
+    depends_on:
+      - redis
+    networks:
+      - feature-net
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    image: feature/nginx
+    container_name: feature-nginx
+    ports:
+      - "80:8080"
+    depends_on:
+      - api
+    networks:
+      - feature-net
+
+volumes:
+  feature-redis-data:
+
+networks:
+  feature-net:
+    driver: bridge
